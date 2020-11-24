@@ -1,4 +1,4 @@
-package api
+package dna
 
 const SECUENCE_SIZE = 4
 const INDEX_CHANGE = SECUENCE_SIZE - 1
