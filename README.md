@@ -24,28 +24,28 @@ URL Local: http://localhost:5000
   
 #### POST /mutant
 Devuelve si el dna corresponde a un mutante.
-#####Request:
+##### Request:
 ```json  
 {
     "dna":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]
 }
 ```  
-#####Response:
-######En el caso de ser mutante:
+##### Response:
+###### En el caso de ser mutante:
 Status: 200
 ```json  
 {
     "message": "Mutante detectado!"
 }
 ```
-######En el caso de ser humano:
+###### En el caso de ser humano:
 Status: 403
 ```json  
 {
     "error": "Es solo otro humano."
 }
 ```
-######Otros posibles errores:
+###### Otros posibles errores:
 Status: codigo del error
 ```json  
 {
