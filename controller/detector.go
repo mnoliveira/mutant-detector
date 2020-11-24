@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"mutant-detector/database"
 	"mutant-detector/dna"
 	"mutant-detector/model"
 	"mutant-detector/utils"
@@ -22,9 +23,13 @@ func DetectMutant(c *gin.Context) {
 		return
 	}
 
+	dnaDB := model.DNADB{ DNA: dnaData }
+
 	if dna.IsMutant(dnaData) {
+		go database.SaveMutant(dnaDB)
 		c.JSON(http.StatusOK, model.ResponseOk{Message:"Mutante detectado!"})
 	} else {
+		go database.SaveHuman(dnaDB)
 		c.JSON(http.StatusForbidden, model.ResponseError{Error:"Es solo otro humano."})
 	}
 }

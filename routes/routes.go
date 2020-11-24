@@ -11,6 +11,7 @@ func Register(router *gin.Engine){
 	router.GET("/ping", ping)
 
 	router.POST("/mutant", controller.DetectMutant)
+	router.GET("/stats", controller.Stats)
 
 }
 

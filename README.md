@@ -8,6 +8,10 @@ Servicio para detección de mutantes.
 cd $GO_HOME/src
 git clone https://github.com/mnoliveira/mutant-detector.git
 ```
+## Dependencias
+```
+go get github.com/gin-gonic/gin
+```
 
 ## Compilación
 ```
@@ -52,3 +56,14 @@ Status: codigo del error
     "error": "Motivo del error"
 }
 ```
+
+#### GET /stats
+Devuelve el reporte de detección de mutantes.
+##### Response:
+```json  
+{
+    "count_mutant_dna": 2,
+    "count_human_dna": 3,
+    "ratio": 1.5
+}
+```  
