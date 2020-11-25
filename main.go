@@ -9,7 +9,10 @@ import (
 
 func main() {
 
-	config.LoadConfig()
+	err := config.LoadConfig()
+	if err != nil {
+		panic(err)
+	}
 
 	router := gin.Default()
 

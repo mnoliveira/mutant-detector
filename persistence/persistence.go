@@ -92,3 +92,8 @@ func getClient() (*mongo.Client, error) {
 
 	return client, nil
 }
+
+func TestDropDBTest() {
+	client, _ := getClient()
+	client.Database("dnaTest").Drop(ctx)
+}

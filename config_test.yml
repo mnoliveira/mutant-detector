@@ -1,0 +1,14 @@
+listenPort: 5000
+
+#Configuraciones del detector
+#longitud de la secuencia de digitos iguales a buscar
+#el maximo de secuencias que puede tener un humano
+detector:
+  secuence_size: 4
+  max_human_secuence: 1
+
+database:
+  mongodb:
+    host: localhost
+    port: 27017
+    name: dnaTest

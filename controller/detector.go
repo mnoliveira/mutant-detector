@@ -12,7 +12,7 @@ import (
 func DetectMutant(c *gin.Context) {
 
 	var input model.InputData
-	if err := c.ShouldBind(&input); err != nil {
+	if err := c.ShouldBind(&input); err != nil || len(input.DNA) == 0 {
 		c.JSON(http.StatusBadRequest, model.ResponseError{Error: "json invalido"})
 		return
 	}

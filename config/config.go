@@ -3,6 +3,7 @@ package config
 import "github.com/olebedev/config"
 
 var Config *config.Config
+var TestMode bool
 
 func LoadConfig() error {
 
@@ -16,7 +17,12 @@ func LoadConfig() error {
 
 func load() (*config.Config, error) {
 
-	cfg, err := config.ParseYamlFile("config.yml")
+	file := "config.yml"
+	if TestMode {
+		file = "config_test.yml"
+	}
+
+	cfg, err := config.ParseYamlFile(file)
 	if err != nil {
 		return nil, err
 	}
