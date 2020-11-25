@@ -30,9 +30,17 @@ go build
 go run mutant-detector
 ```
 
+## Host
+Para hostear el servicio se utilizaron los servicios de AWS. En particular:
+* **EC2** - para la instancia de MongoDB
+* **Elastic Beanstalk** - para el servicio*
+
+\* Por temas de costo, no se habilito el autoscaling.
+
 ## APIs  
+URL Host: http://mutant-env.eba-zgsi5a4x.us-east-1.elasticbeanstalk.com/ \
 URL Local: http://localhost:5000
-  
+
 #### POST /mutant
 Devuelve si el dna corresponde a un mutante.
 ##### Request:
@@ -74,3 +82,9 @@ Devuelve el reporte de detección de mutantes.
     "ratio": 1.5
 }
 ```  
+
+
+## Test
+Para la ejecucion de los test se utilizaron las herramientas provistas por el IDE Jetbrain Goland. Donde se obtuvo un coverage de 86.8%.
+
+![coverage](docs/coverage.png)

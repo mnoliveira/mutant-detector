@@ -17,6 +17,7 @@ import (
 var router *gin.Engine
 
 func TestMain(m *testing.M) {
+	//Creo lo necesario para el entorno de testeo
 	config.TestMode = true
 	config.LoadConfig()
 
@@ -24,6 +25,7 @@ func TestMain(m *testing.M) {
 	routes.Register(router)
 
 	code := m.Run()
+	//Elimino la base creada para el testeo
 	database.TestDropDBTest()
 	os.Exit(code)
 }
