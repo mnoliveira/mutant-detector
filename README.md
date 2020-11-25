@@ -7,6 +7,11 @@ Una idea que se tuvo en cuenta para el desarrollo es que sea facilmente aplicabl
 - Que la longitud de las secuencias a buscar pueda ser configurable
 - Que el algoritmo de busqueda no tenga ninguna restriccion en cuanto a los caracteres que recibe (La validacion de que sea un DNA valido esta separada y es facilmente modificable)
 
+## Aclaraciones
+Para ejecutar localmente el servicio sera necesario:
+* Tener instalado Go (>=1.12)
+* Tener instalado MongoDB o cambiar el host donde esta la instancia de MongoDB a usar (ver sección de configuración para ver como cambiarlo)
+
 ## Instalación
 
 ```
@@ -29,6 +34,18 @@ go build
 ```
 go run mutant-detector
 ```
+
+## Configuración
+El servicio cuenta con un archivo **config.yml** donde estaran los valores para la conexion a MongoDB junto con otras configuraciones. \
+Estos valores podran modificarse directamente en el archivo antes de ejecutar el servicio o mismo al momento de ejecutarlo, pasando los valores deseados como argumentos. 
+
+Ejemplo donde ejecuta el servicio en el puerto 5001 y usando la base de mongo dna2:
+
+```
+go run mutant-detector -listenPort=5001 -database-mongodb-name=dna2
+```
+
+Para conocer todos los parametros posibles, ver el archivo de configuración.
 
 ## Host
 Para hostear el servicio se utilizaron los servicios de AWS. En particular:
