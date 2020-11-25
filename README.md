@@ -1,6 +1,11 @@
 # mutant-detector
 Servicio para detección de mutantes.
 
+## Consideraciones
+
+Una idea que se tuvo en cuenta para el desarrollo es que sea facilmente aplicable a buscar secuencias de tamaño N en una matriz con K digitos distintos, para esto se tomaron dos decisiones:
+- Que la longitud de las secuencias a buscar pueda ser configurable
+- Que el algoritmo de busqueda no tenga ninguna restriccion en cuanto a los caracteres que recibe (La validacion de que sea un DNA valido esta separada y es facilmente modificable)
 
 ## Instalación
 
@@ -11,6 +16,8 @@ git clone https://github.com/mnoliveira/mutant-detector.git
 ## Dependencias
 ```
 go get github.com/gin-gonic/gin
+go get go.mongodb.org/mongo-driver/mongo
+go get github.com/olebedev/config
 ```
 
 ## Compilación

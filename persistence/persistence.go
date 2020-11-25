@@ -6,12 +6,10 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"mutant-detector/config"
 	"mutant-detector/model"
 )
 
-const host = "localhost"
-const port = 27017
-const database = "dna"
 const humanCollection = "humans"
 const mutantCollection = "mutants"
 
@@ -70,10 +68,16 @@ func getDB() (*mongo.Database, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	database, _ := config.Config.String("database.mongodb.name")
+
 	return client.Database(database), nil
 }
 
 func getClient() (*mongo.Client, error) {
+
+	host, _ := config.Config.String("database.mongodb.host")
+	port, _ := config.Config.Int("database.mongodb.port")
 
 	clientOpts := options.Client().ApplyURI(fmt.Sprintf("mongodb://%s:%d", host, port))
 	client, err := mongo.Connect(ctx, clientOpts)

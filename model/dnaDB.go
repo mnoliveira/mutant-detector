@@ -1,5 +1,5 @@
 package model
 
 type DNADB struct {
-	DNA DNA                `bson:"dna"`
+	DNA DNA `bson:"dna"`
 }

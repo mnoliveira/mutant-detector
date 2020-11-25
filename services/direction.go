@@ -1,10 +1,10 @@
-package dna
+package services
 
 import (
 	"mutant-detector/model"
 )
 
-/*La idea general es que al recorrer primero validar que todavia se pueda formar la secuencia a partir de la posicion actual
+/*La idea general es que al recorrer cada direccion, primero valide que todavia se pueda formar la secuencia a partir de la posicion actual
 y saltar a dicha posicion volviendo hacia atras, asi ahorro recorrer uno por uno todos los elementos todo el tiempo.
 Un dato que se tuvo en cuenta es poder cambiar la longitud de la secuencia que se busca solo cambiando el valor de SECUENCE_SIZE
 */
@@ -19,17 +19,16 @@ func findHorizontalMatchs(dna model.DNA, i int, matchs *int) {
 
 	//Busco secuencias en la i-esima fila
 	j := 0
-	for j+INDEX_CHANGE < len(dna) && *matchs <= LIMIT_SECUENCE {
+	for j+IndexChange < len(dna) && *matchs <= MaxHumanSecuence {
 
-		k := j + INDEX_CHANGE
+		k := j + IndexChange
 		for k > j && dna[i][k-1] == dna[i][k] {
 			k--
 		}
 
 		if k == j {
-			//fmt.Println("Encontre un match horizontal.")
 			*matchs++
-			k += SECUENCE_SIZE
+			k += SecuenceSize
 		}
 
 		j = k
@@ -40,17 +39,16 @@ func findVerticalMatchs(dna model.DNA, j int, matchs *int) {
 
 	//Busco secuencias en la j-esima columna
 	i := 0
-	for i+INDEX_CHANGE < len(dna) && *matchs <= LIMIT_SECUENCE {
+	for i+IndexChange < len(dna) && *matchs <= MaxHumanSecuence {
 
-		k := i + INDEX_CHANGE
+		k := i + IndexChange
 		for k > i && dna[k-1][j] == dna[k][j] {
 			k--
 		}
 
 		if k == i {
-			//fmt.Println("Encontre un match vertical.")
 			*matchs++
-			k += SECUENCE_SIZE
+			k += SecuenceSize
 		}
 
 		i = k
@@ -69,7 +67,7 @@ func findObliqueLeftToRightMatchs(dna model.DNA, indexDiagonal int, matchs *int)
 	searchMatchsObliqueLR(dna, indexRow, indexColumn, matchs)
 
 	//Si esta en la primer posicion, ya recorri la unica diagonal posible
-	if indexDiagonal > 0 && *matchs <= LIMIT_SECUENCE {
+	if indexDiagonal > 0 && *matchs <= MaxHumanSecuence {
 		indexRow = indexDiagonal
 		indexColumn = 0
 
@@ -80,20 +78,19 @@ func findObliqueLeftToRightMatchs(dna model.DNA, indexDiagonal int, matchs *int)
 func searchMatchsObliqueLR(dna model.DNA, i int, j int, matchs *int) {
 
 	//Recorre una diagonal de izquierda a derecha buscando secuencias
-	for j+INDEX_CHANGE < len(dna) && i+INDEX_CHANGE < len(dna) && *matchs <= LIMIT_SECUENCE {
+	for j+IndexChange < len(dna) && i+IndexChange < len(dna) && *matchs <= MaxHumanSecuence {
 
-		k := i + INDEX_CHANGE
-		l := j + INDEX_CHANGE
+		k := i + IndexChange
+		l := j + IndexChange
 		for k > i && l > j && dna[k-1][l-1] == dna[k][l] {
 			k--
 			l--
 		}
 
 		if k == i && l == j {
-			//fmt.Println("Encontre un match oblicuo de izquierda a derecha.")
 			*matchs++
-			k += SECUENCE_SIZE
-			l += SECUENCE_SIZE
+			k += SecuenceSize
+			l += SecuenceSize
 		}
 
 		i = k
@@ -111,7 +108,7 @@ func findObliqueRightToLeftMatchs(dna model.DNA, indexDiagonal int, matchs *int)
 	searchMatchsObliqueRL(dna, indexRow, indexColumn, matchs)
 
 	//Si esta en la primer posicion, ya recorri la unica diagonal posible
-	if indexDiagonal > 0 && *matchs <= LIMIT_SECUENCE {
+	if indexDiagonal > 0 && *matchs <= MaxHumanSecuence {
 		indexRow = indexDiagonal
 		indexColumn = len(dna) - 1
 
@@ -122,20 +119,19 @@ func findObliqueRightToLeftMatchs(dna model.DNA, indexDiagonal int, matchs *int)
 func searchMatchsObliqueRL(dna model.DNA, i int, j int, matchs *int) {
 
 	//Recorre una diagonal de derecha a izquierda buscando secuencias
-	for j-INDEX_CHANGE >= 0 && i+INDEX_CHANGE < len(dna) && *matchs <= LIMIT_SECUENCE {
+	for j-IndexChange >= 0 && i+IndexChange < len(dna) && *matchs <= MaxHumanSecuence {
 
-		k := i + INDEX_CHANGE
-		l := j - INDEX_CHANGE
+		k := i + IndexChange
+		l := j - IndexChange
 		for k > i && l < j && dna[k-1][l+1] == dna[k][l] {
 			k--
 			l++
 		}
 
 		if k == i && l == j {
-			//fmt.Println("Encontre un match oblicuo de derecha a izquierda.")
 			*matchs++
-			k += SECUENCE_SIZE
-			l -= SECUENCE_SIZE
+			k += SecuenceSize
+			l -= SecuenceSize
 		}
 
 		i = k

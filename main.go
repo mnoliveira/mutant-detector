@@ -2,15 +2,21 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"mutant-detector/config"
 	"mutant-detector/routes"
+	"strconv"
 )
 
 func main() {
 
+	config.LoadConfig()
+
 	router := gin.Default()
-	gin.SetMode("debug")
 
 	routes.Register(router)
 
-	router.Run(":5000")
+	listenPort, _ := config.Config.Int("listenPort")
+	port := ":" + strconv.Itoa(listenPort)
+
+	router.Run(port)
 }
